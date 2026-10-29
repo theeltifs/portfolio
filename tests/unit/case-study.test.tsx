@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 
 const notFound = vi.hoisted(() => vi.fn(() => {
   throw new Error("NEXT_NOT_FOUND");
-});
+}));
 vi.mock("next/navigation", () => ({ notFound }));
 
 import Page, { generateStaticParams } from "@/app/projects/[slug]/page";
