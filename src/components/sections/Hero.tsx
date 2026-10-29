@@ -5,6 +5,7 @@ import { ScriptNote } from "@/components/ui/ScriptNote";
 import { StatBar } from "@/components/ui/StatBar";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { TechChip } from "@/components/ui/TechChip";
+import { HeroScene } from "@/components/three/HeroScene";
 
 const rail = ["Python", "FastAPI", "LangGraph", "Ollama", "React", "PostgreSQL"];
 
@@ -18,7 +19,9 @@ const snippet = `class MultiAgentSystem:
 export function Hero() {
   return (
     <section id="home" className="relative isolate min-h-screen overflow-hidden px-6 pb-16 pt-28 md:px-24">
-      <div data-hero-field className="absolute inset-0 -z-10" />
+      <div data-hero-field className="absolute inset-0 -z-10">
+        <HeroScene />
+      </div>
       <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-2">
         <div>
           <p className="text-lg text-muted">Hi, I&apos;m {profile.name}</p>
