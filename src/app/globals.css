@@ -50,3 +50,9 @@ html.lenis body {
     scroll-behavior: auto;
   }
 }
+
+.glass-card[data-accent="green"] { --accent: var(--accent-green); }
+.glass-card[data-accent="blue"] { --accent: var(--accent-blue); }
+.glass-card[data-accent="orange"] { --accent: var(--accent-orange); }
+.glass-card[data-accent="violet"] { --accent: var(--accent-violet); }
+.glass-card[data-accent] { box-shadow: 0 0 40px -12px var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
