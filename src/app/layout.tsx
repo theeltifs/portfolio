@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Anton, Inter, Caveat } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 
 const display = Anton({ weight: "400", variable: "--font-display", subsets: ["latin"] });
 const body = Inter({ variable: "--font-body", subsets: ["latin"] });
@@ -18,7 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${display.variable} ${body.variable} ${script.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-bg text-fg font-body">{children}</body>
+      <body className="min-h-full flex flex-col bg-bg text-fg font-body"><SmoothScroll>{children}</SmoothScroll></body>
     </html>
   );
 }
