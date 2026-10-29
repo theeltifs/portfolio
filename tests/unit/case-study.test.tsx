@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
 
-const notFound = vi.fn(() => {
+const notFound = vi.hoisted(() => vi.fn(() => {
   throw new Error("NEXT_NOT_FOUND");
 });
 vi.mock("next/navigation", () => ({ notFound }));

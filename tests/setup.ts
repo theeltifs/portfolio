@@ -24,3 +24,8 @@ if (typeof window !== "undefined" && !window.matchMedia) {
     onchange: null,
   })) as unknown as typeof window.matchMedia;
 }
+
+// jsdom cannot create a GL context; report "unavailable" quietly.
+if (typeof HTMLCanvasElement !== "undefined") {
+  HTMLCanvasElement.prototype.getContext = (() => null) as unknown as typeof HTMLCanvasElement.prototype.getContext;
+}
