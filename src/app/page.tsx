@@ -1,3 +1,10 @@
+import { Nav } from "@/components/layout/Nav";
+
 export default function Home() {
-  return <main />;
+  return (
+    <>
+      <Nav />
+      <main />
+    </>
+  );
 }
