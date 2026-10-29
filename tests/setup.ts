@@ -10,3 +10,17 @@ vi.mock("next/font/google", () => ({
   Inter: font("inter"),
   Caveat: font("caveat"),
 }));
+
+// jsdom has no matchMedia; ScrollTrigger touches it on import.
+if (typeof window !== "undefined" && !window.matchMedia) {
+  window.matchMedia = ((query: string) => ({
+    matches: false,
+    media: query,
+    addEventListener() {},
+    removeEventListener() {},
+    addListener() {},
+    removeListener() {},
+    dispatchEvent: () => false,
+    onchange: null,
+  })) as unknown as typeof window.matchMedia;
+}
