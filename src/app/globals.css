@@ -140,3 +140,9 @@ html[data-intro="on"] header,
 html[data-intro="on"] nav[aria-label="Sections"] {
   visibility: hidden;
 }
+
+/* Native scroll lock while the intro plays (keyboard, touch, scrollbar). */
+html[data-intro="on"],
+html[data-intro="on"] body {
+  overflow: hidden;
+}

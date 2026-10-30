@@ -62,3 +62,13 @@ test("page text has no phone number", async ({ page }) => {
   await page.goto("/");
   expect(await page.locator("body").innerText()).not.toContain("+92");
 });
+
+test("page cannot be scrolled while the intro video plays", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-intro", "on");
+  await page.mouse.move(700, 450);
+  await page.mouse.wheel(0, 1500);
+  await page.keyboard.press("End");
+  await page.waitForTimeout(500);
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+});
