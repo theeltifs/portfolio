@@ -4,6 +4,7 @@ import { ORB_PARTICLES } from "./Orb";
 export const SEGMENT = { expand: 0.2, burst: 0.1, reveal: 0.2, hold: 0.3, collapse: 0.2 } as const;
 
 export type TimelineTargets = {
+  stage: HTMLElement;
   orb: HTMLElement;
   particles: HTMLElement[];
   panels: HTMLElement[];
@@ -18,19 +19,22 @@ export function segmentScrollTop(start: number, end: number, index: number, coun
 }
 
 const PANEL_SHIFT = 24;
+const RECOLOUR_AT = SEGMENT.expand + SEGMENT.burst + SEGMENT.reveal + SEGMENT.hold; // 0.8
+const RECOLOUR_LEN = 0.3;
 
 export function buildUniverseTimeline(
-  { orb, particles, panels }: TimelineTargets,
-  count: number,
+  { stage, orb, particles, panels }: TimelineTargets,
+  colors: string[],
 ): gsap.core.Timeline {
   const tl = gsap.timeline({ paused: true, defaults: { ease: "none" } });
   const noRender = { immediateRender: false } as const;
 
+  tl.set(stage, { "--orb": colors[0] }, 0);
   tl.set(orb, { scale: 1 }, 0);
   tl.set(particles, { x: 0, y: 0, opacity: 0 }, 0);
   tl.set(panels, { opacity: 0, y: PANEL_SHIFT }, 0);
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < colors.length; i++) {
     const t0 = i;
     const burstAt = t0 + SEGMENT.expand;
     const revealAt = burstAt + SEGMENT.burst;
@@ -68,6 +72,15 @@ export function buildUniverseTimeline(
       collapseAt,
     );
     tl.fromTo(orb, { scale: 1.1 }, { scale: 1, duration: SEGMENT.collapse, ...noRender }, collapseAt);
+
+    if (i < colors.length - 1) {
+      tl.fromTo(
+        stage,
+        { "--orb": colors[i] },
+        { "--orb": colors[i + 1], duration: RECOLOUR_LEN, ...noRender },
+        t0 + RECOLOUR_AT,
+      );
+    }
 
   }
 

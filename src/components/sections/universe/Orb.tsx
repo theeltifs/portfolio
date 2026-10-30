@@ -16,10 +16,12 @@ export const ORB_PARTICLES: readonly { angle: number; distance: number }[] = [
   { angle: 330, distance: 118 },
 ];
 
-type OrbProps = { live?: boolean; accent?: AccentKey; className?: string };
+type OrbProps = { live?: boolean; accent?: AccentKey; color?: string; className?: string };
 
-export function Orb({ live = false, accent, className = "" }: OrbProps) {
-  const style = accent
+export function Orb({ live = false, accent, color, className = "" }: OrbProps) {
+  const style = color
+    ? ({ "--orb": color } as CSSProperties)
+    : accent
     ? ({ "--orb": `var(--accent-${accent})` } as CSSProperties)
     : undefined;
   return (

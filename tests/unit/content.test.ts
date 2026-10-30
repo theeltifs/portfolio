@@ -62,3 +62,11 @@ describe("content", () => {
     ]);
   });
 });
+
+describe("orb colours", () => {
+  it("each project has its own hex orb colour", () => {
+    const colors = projects.map((p) => p.orb);
+    colors.forEach((c) => expect(c).toMatch(/^#[0-9a-f]{6}$/i));
+    expect(new Set(colors).size).toBe(4);
+  });
+});

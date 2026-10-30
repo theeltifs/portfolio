@@ -11,6 +11,8 @@ export type Project = {
   origin: "personal" | "final-year" | "orzeh";
   video?: string;
   poster?: string;
+  /** Orb colour, taken from the project preview image. */
+  orb: string;
   links: { github?: string; live?: string };
 };
 export type Role = {

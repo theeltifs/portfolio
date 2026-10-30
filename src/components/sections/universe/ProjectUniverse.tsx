@@ -16,6 +16,7 @@ const COUNT = projects.length;
 
 export function ProjectUniverse() {
   const sectionRef = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const orbWrapRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [announcement, setAnnouncement] = useState("");
@@ -31,12 +32,13 @@ export function ProjectUniverse() {
     () => {
       const section = sectionRef.current;
       const wrap = orbWrapRef.current;
-      if (!section || !wrap) return;
+      const stage = stageRef.current;
+      if (!section || !wrap || !stage) return;
       const orb = wrap.querySelector<HTMLElement>("[data-orb]")!;
       const particles = Array.from(wrap.querySelectorAll<HTMLElement>("[data-particle]"));
       const panels = Array.from(section.querySelectorAll<HTMLElement>("[data-panel]"));
 
-      const tl = buildUniverseTimeline({ orb, particles, panels }, COUNT);
+      const tl = buildUniverseTimeline({ stage, orb, particles, panels }, projects.map((p) => p.orb));
       const st = ScrollTrigger.create({
         id: TRIGGER_ID,
         trigger: section,
@@ -95,7 +97,7 @@ export function ProjectUniverse() {
       onFocus={onFocusIn}
       className="relative h-svh overflow-hidden"
     >
-      <div className="orb-wash relative flex h-full flex-col px-6 py-10 md:px-24">
+      <div ref={stageRef} className="orb-wash relative flex h-full flex-col px-6 py-10 md:px-24">
         <a
           href="#experience"
           className="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-4 focus:z-10 focus:rounded-full focus:bg-fg focus:px-4 focus:py-2 focus:text-bg"

@@ -12,6 +12,11 @@ describe("Orb", () => {
     expect(root.getAttribute("aria-hidden")).toBe("true");
     expect(container.querySelectorAll("[data-particle]")).toHaveLength(12);
   });
+  it("static orb takes an explicit colour", () => {
+    const { container } = render(<Orb color="#123456" />);
+    expect((container.querySelector("[data-orb]") as HTMLElement).style.getPropertyValue("--orb")).toBe("#123456");
+  });
+
   it("static renders no particles and has orb-static", () => {
     const { container } = render(<Orb accent="blue" />);
     expect(container.querySelectorAll("[data-particle]")).toHaveLength(0);

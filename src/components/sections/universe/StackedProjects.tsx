@@ -10,7 +10,7 @@ export function StackedProjects({ reduced }: { reduced: boolean }) {
       {projects.map((p) => {
         const card = (
           <GlassCard className="p-4">
-            <Orb className="mx-auto mb-4 h-14 w-14" />
+            <Orb color={p.orb} className="mx-auto mb-4 h-14 w-14" />
             <ProjectPanel project={p} />
           </GlassCard>
         );
