@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "@/lib/motion/use-reduced-motion";
 
-const MAX_MS = 4500;
+// Only a safety net: if the video never starts (autoplay blocked, file missing) we fail open.
+const START_TIMEOUT_MS = 10_000;
 const FADE_MS = 600;
 
 const HELLO = "Hello";
@@ -24,7 +25,7 @@ function HelloTyped() {
   );
 }
 
-/** Full-screen look-down clip shown for a few seconds on load, then fades away to the page. */
+/** Full-screen look-down clip shown on every load; the page stays hidden until it has finished playing. */
 export function HeroIntro() {
   const reduced = useReducedMotion();
   const [phase, setPhase] = useState<"show" | "fade" | "done">("show");
@@ -35,15 +36,18 @@ export function HeroIntro() {
       setPhase("done");
       return;
     }
-    const timer = setTimeout(() => setPhase("fade"), MAX_MS);
+    if (helloOn) return; // the video is playing; it ends the intro itself
+    const timer = setTimeout(() => setPhase("fade"), START_TIMEOUT_MS);
     return () => clearTimeout(timer);
-  }, [reduced]);
+  }, [reduced, helloOn]);
 
   useEffect(() => {
     if (phase === "done") return;
     document.body.style.overflow = "hidden";
+    document.documentElement.dataset.intro = "on";
     return () => {
       document.body.style.overflow = "";
+      delete document.documentElement.dataset.intro;
     };
   }, [phase]);
 
@@ -94,6 +98,7 @@ export function HeroIntro() {
           preload="auto"
           onPlaying={() => setHelloOn(true)}
           onEnded={() => setPhase("fade")}
+          onError={() => setPhase("fade")}
           className="block h-auto max-h-[68vh] max-w-full object-contain"
         />
       </div>

@@ -134,3 +134,9 @@ html.lenis body {
     }
   }
 }
+
+/* The intro video is mandatory: keep site chrome out of sight until it ends. */
+html[data-intro="on"] header,
+html[data-intro="on"] nav[aria-label="Sections"] {
+  visibility: hidden;
+}

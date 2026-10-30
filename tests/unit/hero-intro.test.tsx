@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, fireEvent, act } from "@testing-library/react";
 
 const state = { reduced: false };
@@ -50,5 +50,52 @@ describe("HeroIntro hello", () => {
     state.reduced = true;
     const { container } = render(<HeroIntro />);
     expect(container.firstChild).toBeNull();
+  });
+});
+
+describe("HeroIntro is mandatory", () => {
+  beforeEach(() => {
+    state.reduced = false;
+    vi.useFakeTimers();
+  });
+  afterEach(() => vi.useRealTimers());
+
+  it("stays up for the whole video, well past 4.5s", () => {
+    const { container } = render(<HeroIntro />);
+    fireEvent.playing(container.querySelector("video")!);
+    act(() => void vi.advanceTimersByTime(60_000));
+    const overlay = container.querySelector("[data-hero-intro]");
+    expect(overlay).not.toBeNull();
+    expect(overlay!.classList.contains("opacity-0")).toBe(false);
+  });
+
+  it("leaves only after the video ends", () => {
+    const { container } = render(<HeroIntro />);
+    fireEvent.playing(container.querySelector("video")!);
+    fireEvent.ended(container.querySelector("video")!);
+    act(() => void vi.advanceTimersByTime(700));
+    expect(container.querySelector("[data-hero-intro]")).toBeNull();
+  });
+
+  it("fails open if the video errors", () => {
+    const { container } = render(<HeroIntro />);
+    fireEvent.error(container.querySelector("video")!);
+    act(() => void vi.advanceTimersByTime(700));
+    expect(container.querySelector("[data-hero-intro]")).toBeNull();
+  });
+
+  it("fails open if the video never starts playing", () => {
+    const { container } = render(<HeroIntro />);
+    act(() => void vi.advanceTimersByTime(10_000));
+    act(() => void vi.advanceTimersByTime(700));
+    expect(container.querySelector("[data-hero-intro]")).toBeNull();
+  });
+
+  it("flags the document so site chrome is hidden, then clears it", () => {
+    const { container } = render(<HeroIntro />);
+    expect(document.documentElement.dataset.intro).toBe("on");
+    fireEvent.ended(container.querySelector("video")!);
+    act(() => void vi.advanceTimersByTime(700));
+    expect(document.documentElement.dataset.intro).toBeUndefined();
   });
 });
