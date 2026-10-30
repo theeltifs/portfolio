@@ -65,7 +65,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
           )}
         </div>
       )}
-      <nav className="mt-16 border-t border-white/10 pt-8">
+      <nav className="mt-16 border-t border-fg/10 pt-8">
         <Link href={`/projects/${next.slug}`} className="text-xl underline underline-offset-4">
           Next project: {next.title} →
         </Link>

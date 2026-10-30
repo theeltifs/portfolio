@@ -28,6 +28,6 @@ describe("Hero", () => {
 
   it("portrait has alt text", () => {
     render(<Hero />);
-    expect(screen.getByRole("img", { name: /Abdullah/ }).getAttribute("alt")).toBeTruthy();
+    expect(screen.getByRole("img", { name: /Portrait of Abdullah/ })).toBeInTheDocument();
   });
 });

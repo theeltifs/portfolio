@@ -34,7 +34,7 @@ export function Experience() {
           <span
             data-timeline-line
             aria-hidden="true"
-            className="absolute left-0 top-0 h-full w-px bg-white/30"
+            className="absolute left-0 top-0 h-full w-px bg-fg/30"
           />
           {experience.map((r) => (
             <li key={r.company} className="relative">

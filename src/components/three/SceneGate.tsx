@@ -4,20 +4,27 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { hasWebGL } from "@/lib/webgl";
 import { useReducedMotion } from "@/lib/motion/use-reduced-motion";
 
-const MIN_WIDTH = 768;
-
-export function SceneGate({ children, fallback }: { children: ReactNode; fallback: ReactNode }) {
+/** `minWidth` (px) turns the scene off below that viewport width; 0 keeps it on at every width. */
+export function SceneGate({
+  children,
+  fallback,
+  minWidth = 0,
+}: {
+  children: ReactNode;
+  fallback: ReactNode;
+  minWidth?: number;
+}) {
   const reduced = useReducedMotion();
   const [capable, setCapable] = useState(false);
   const [lost, setLost] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const check = () => setCapable(hasWebGL() && window.innerWidth >= MIN_WIDTH);
+    const check = () => setCapable(hasWebGL() && window.innerWidth >= minWidth);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
-  }, []);
+  }, [minWidth]);
 
   const enabled = capable && !reduced && !lost;
 

@@ -24,7 +24,7 @@ function buildPositions(count: number): Float32Array {
 
 function Field() {
   const group = useRef<Group>(null);
-  const positions = useMemo(() => buildPositions(900), []);
+  const positions = useMemo(() => buildPositions(window.innerWidth < 768 ? 400 : 900), []);
 
   useFrame((state, delta) => {
     const g = group.current;
@@ -38,7 +38,7 @@ function Field() {
   return (
     <group ref={group}>
       <Points positions={positions} stride={3}>
-        <PointMaterial transparent color="#7aa2ff" size={0.03} sizeAttenuation depthWrite={false} />
+        <PointMaterial transparent color="#3b64d8" size={0.03} sizeAttenuation depthWrite={false} />
       </Points>
     </group>
   );

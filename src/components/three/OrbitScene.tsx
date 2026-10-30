@@ -8,6 +8,7 @@ const StackOrbit = dynamic(() => import("./StackOrbit"), { ssr: false });
 export function OrbitScene() {
   return (
     <SceneGate
+      minWidth={768}
       fallback={
         <div
           aria-hidden="true"

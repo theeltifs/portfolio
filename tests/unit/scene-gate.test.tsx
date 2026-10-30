@@ -43,9 +43,19 @@ describe("SceneGate", () => {
     expect(document.querySelector("canvas")).toBeNull();
   });
 
-  it("falls back on narrow viewports", () => {
+  it("keeps the scene on narrow viewports by default", () => {
     Object.defineProperty(window, "innerWidth", { value: 500, configurable: true });
     setup();
+    expect(screen.getByTestId("canvas")).toBeInTheDocument();
+  });
+
+  it("falls back below an explicit minWidth", () => {
+    Object.defineProperty(window, "innerWidth", { value: 500, configurable: true });
+    render(
+      <SceneGate minWidth={768} fallback={<div data-testid="fallback" />}>
+        <canvas data-testid="canvas" />
+      </SceneGate>,
+    );
     expect(screen.getByTestId("fallback")).toBeInTheDocument();
   });
 

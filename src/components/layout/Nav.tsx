@@ -38,7 +38,7 @@ export function Nav() {
         <div className="flex items-center gap-3">
           <a
             href={`mailto:${profile.email}`}
-            className="rounded-full border border-white/25 px-5 py-2 text-sm font-semibold backdrop-blur hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-fg"
+            className="rounded-full border border-fg/25 px-5 py-2 text-sm font-semibold backdrop-blur hover:bg-fg/10 focus-visible:outline-2 focus-visible:outline-fg"
           >
             Let&apos;s Talk
           </a>
@@ -48,7 +48,7 @@ export function Nav() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
-            className="rounded-full border border-white/25 px-4 py-2 text-sm md:hidden"
+            className="rounded-full border border-fg/25 px-4 py-2 text-sm md:hidden"
           >
             {open ? "Close" : "Menu"}
           </button>
@@ -66,7 +66,7 @@ export function Nav() {
                   active === it.id ? "text-fg" : "text-muted hover:text-fg"
                 }`}
               >
-                <span className={`h-2 w-2 rounded-full ${active === it.id ? "bg-fg" : "bg-white/30"}`} />
+                <span className={`h-2 w-2 rounded-full ${active === it.id ? "bg-fg" : "bg-fg/30"}`} />
                 <span>{it.n}</span>
                 <span className="hidden group-hover:inline">{it.label}</span>
               </a>

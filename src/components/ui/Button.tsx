@@ -9,7 +9,7 @@ type ButtonProps = {
 
 const variants = {
   solid: "bg-fg text-bg hover:bg-fg/85",
-  outline: "border border-white/25 text-fg hover:bg-white/10",
+  outline: "border border-fg/25 text-fg hover:bg-fg/10",
 };
 
 export function Button({ href, variant, icon, children, className = "", ...rest }: ButtonProps) {

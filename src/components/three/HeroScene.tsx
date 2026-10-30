@@ -12,7 +12,7 @@ function HeroFallback() {
       className="h-full w-full"
       style={{
         backgroundImage:
-          "radial-gradient(circle at 70% 40%, rgb(76 141 255 / 0.18), transparent 60%), radial-gradient(rgb(255 255 255 / 0.18) 1px, transparent 1px)",
+          "radial-gradient(circle at 70% 40%, rgb(76 141 255 / 0.18), transparent 60%), radial-gradient(rgb(11 13 18 / 0.15) 1px, transparent 1px)",
         backgroundSize: "100% 100%, 28px 28px",
       }}
     />

@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #07080b;
-  --fg: #ffffff;
-  --muted: rgb(255 255 255 / 0.6);
-  --glass: rgb(255 255 255 / 0.05);
-  --glass-border: rgb(255 255 255 / 0.1);
+  --bg: #ffffff;
+  --fg: #0b0d12;
+  --muted: rgb(11 13 18 / 0.65);
+  --glass: rgb(255 255 255 / 0.7);
+  --glass-border: rgb(11 13 18 / 0.1);
   --accent-green: #3ddc84;
   --accent-blue: #4c8dff;
   --accent-orange: #ff8a3d;
   --accent-violet: #a46bff;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -49,6 +49,14 @@ html.lenis body {
   html {
     scroll-behavior: auto;
   }
+}
+
+@keyframes hello-hold-out {
+  0%, 70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.hello-in-out {
+  animation: hello-hold-out 2.6s ease-out both;
 }
 
 .glass-card[data-accent="green"] { --accent: var(--accent-green); }

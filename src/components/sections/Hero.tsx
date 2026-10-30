@@ -1,10 +1,11 @@
-import Image from "next/image";
 import { profile } from "@/content/profile";
 import { Button } from "@/components/ui/Button";
 import { ScriptNote } from "@/components/ui/ScriptNote";
 import { StatBar } from "@/components/ui/StatBar";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { TechChip } from "@/components/ui/TechChip";
+import { HeroIntro } from "@/components/media/HeroIntro";
+import { HeroAvatar } from "@/components/media/HeroAvatar";
 import { HeroScene } from "@/components/three/HeroScene";
 
 const rail = ["Python", "FastAPI", "LangGraph", "Ollama", "React", "PostgreSQL"];
@@ -19,6 +20,7 @@ const snippet = `class MultiAgentSystem:
 export function Hero() {
   return (
     <section id="home" className="relative isolate min-h-screen overflow-hidden px-6 pb-16 pt-28 md:px-24">
+      <HeroIntro />
       <div data-hero-field className="absolute inset-0 -z-10">
         <HeroScene />
       </div>
@@ -49,15 +51,7 @@ export function Hero() {
         </div>
 
         <div className="relative">
-          <Image
-            src="/media/hero.svg"
-            alt="Portrait of Abdullah Shafique"
-            width={800}
-            height={1000}
-            priority
-            unoptimized
-            className="mx-auto w-full max-w-md rounded-3xl"
-          />
+          <HeroAvatar />
           <GlassCard className="absolute -left-4 bottom-8 hidden w-72 p-4 md:block">
             <p className="mb-2 text-xs text-muted">Multi-Agent System</p>
             <pre className="overflow-hidden text-[11px] leading-relaxed text-fg/90">

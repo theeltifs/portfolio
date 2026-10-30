@@ -17,7 +17,7 @@ function Orbit() {
     <>
       <mesh>
         <icosahedronGeometry args={[0.7, 1]} />
-        <meshBasicMaterial color="#ffffff" wireframe />
+        <meshBasicMaterial color="#3b4252" wireframe />
       </mesh>
       <group ref={ring}>
         {Array.from({ length: NODES }, (_, i) => {
