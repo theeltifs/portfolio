@@ -2,18 +2,18 @@ import type { CSSProperties } from "react";
 import type { AccentKey } from "@/content/types";
 
 export const ORB_PARTICLES: readonly { angle: number; distance: number }[] = [
-  { angle: 0, distance: 190 },
-  { angle: 30, distance: 240 },
-  { angle: 60, distance: 200 },
-  { angle: 90, distance: 260 },
-  { angle: 120, distance: 210 },
-  { angle: 150, distance: 250 },
-  { angle: 180, distance: 195 },
-  { angle: 210, distance: 245 },
-  { angle: 240, distance: 205 },
-  { angle: 270, distance: 255 },
-  { angle: 300, distance: 215 },
-  { angle: 330, distance: 235 },
+  { angle: 0, distance: 95 },
+  { angle: 30, distance: 120 },
+  { angle: 60, distance: 100 },
+  { angle: 90, distance: 130 },
+  { angle: 120, distance: 105 },
+  { angle: 150, distance: 125 },
+  { angle: 180, distance: 98 },
+  { angle: 210, distance: 122 },
+  { angle: 240, distance: 102 },
+  { angle: 270, distance: 128 },
+  { angle: 300, distance: 108 },
+  { angle: 330, distance: 118 },
 ];
 
 type OrbProps = { live?: boolean; accent?: AccentKey; className?: string };

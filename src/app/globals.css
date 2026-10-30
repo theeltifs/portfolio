@@ -82,7 +82,7 @@ html.lenis body {
 .orb-glow {
   inset: 10%;
   background: color-mix(in srgb, var(--orb) 45%, transparent);
-  box-shadow: 0 0 80px 30px color-mix(in srgb, var(--orb) 40%, transparent);
+  box-shadow: 0 0 40px 12px color-mix(in srgb, var(--orb) 35%, transparent);
   opacity: 0.7;
 }
 .orb-core {

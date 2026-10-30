@@ -6,7 +6,7 @@ import { ProjectVideo } from "@/components/media/ProjectVideo";
 export function ProjectPanel({ project: p, headingId }: { project: Project; headingId?: string }) {
   return (
     <div>
-      <ProjectVideo src={p.video} poster={p.poster} accent={p.accent} title={p.title} />
+      <ProjectVideo src={p.video} poster={p.poster} accent="green" title={p.title} />
       <h3 id={headingId} className="mt-4 font-display text-3xl uppercase md:text-4xl">
         {p.title}
       </h3>

@@ -10,20 +10,12 @@ import { UniverseProgress } from "./UniverseProgress";
 import { activeIndexFor, buildUniverseTimeline, segmentScrollTop } from "./universe-timeline";
 
 const TRIGGER_ID = "project-universe";
-const FALLBACK_HEX = { green: "#3ddc84", blue: "#4c8dff", orange: "#ff8a3d", violet: "#a46bff" };
 const PARALLAX_PX = 12;
 const COUNT = projects.length;
 
-function resolveAccents(): string[] {
-  const style = getComputedStyle(document.documentElement);
-  return projects.map(
-    (p) => style.getPropertyValue(`--accent-${p.accent}`).trim() || FALLBACK_HEX[p.accent],
-  );
-}
 
 export function ProjectUniverse() {
   const sectionRef = useRef<HTMLElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
   const orbWrapRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [announcement, setAnnouncement] = useState("");
@@ -38,14 +30,13 @@ export function ProjectUniverse() {
   useGSAP(
     () => {
       const section = sectionRef.current;
-      const stage = stageRef.current;
       const wrap = orbWrapRef.current;
-      if (!section || !stage || !wrap) return;
+      if (!section || !wrap) return;
       const orb = wrap.querySelector<HTMLElement>("[data-orb]")!;
       const particles = Array.from(wrap.querySelectorAll<HTMLElement>("[data-particle]"));
       const panels = Array.from(section.querySelectorAll<HTMLElement>("[data-panel]"));
 
-      const tl = buildUniverseTimeline({ stage, orb, particles, panels }, resolveAccents());
+      const tl = buildUniverseTimeline({ orb, particles, panels }, COUNT);
       const st = ScrollTrigger.create({
         id: TRIGGER_ID,
         trigger: section,
@@ -104,7 +95,7 @@ export function ProjectUniverse() {
       onFocus={onFocusIn}
       className="relative h-svh overflow-hidden"
     >
-      <div ref={stageRef} className="orb-wash relative flex h-full flex-col px-6 py-10 md:px-24">
+      <div className="orb-wash relative flex h-full flex-col px-6 py-10 md:px-24">
         <a
           href="#experience"
           className="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-4 focus:z-10 focus:rounded-full focus:bg-fg focus:px-4 focus:py-2 focus:text-bg"
@@ -115,7 +106,7 @@ export function ProjectUniverse() {
           Featured Projects
         </h2>
         <div className="mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 md:grid-cols-2">
-          <div ref={orbWrapRef} className="mx-auto w-full max-w-md">
+          <div ref={orbWrapRef} className="mx-auto w-full max-w-[13rem]">
             <Orb live />
           </div>
           <div className="grid">
@@ -127,7 +118,7 @@ export function ProjectUniverse() {
                 aria-hidden={i !== active ? "true" : undefined}
                 className="col-start-1 row-start-1"
               >
-                <GlassCard accent={p.accent} className="p-5">
+                <GlassCard className="p-5">
                   <ProjectPanel project={p} headingId={`project-${p.slug}`} />
                 </GlassCard>
               </div>
