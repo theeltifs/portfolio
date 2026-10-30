@@ -23,14 +23,18 @@ test("dot-nav scrolls #projects into view", async ({ page }) => {
   await expect(page.locator("#projects")).toBeInViewport({ timeout: 5000 });
 });
 
-for (const slug of SLUGS) {
-  test(`card opens case study: ${slug}`, async ({ page }) => {
-    await page.goto("/");
-    await page.locator(`a[href="/projects/${slug}"]`).click();
-    await expect(page).toHaveURL(new RegExp(`/projects/${slug}$`));
-    await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
-  });
-}
+// Narrow viewport renders the stacked layout, where every case-study link is live.
+test.describe("case-study cards (stacked layout)", () => {
+  test.use({ viewport: { width: 600, height: 900 } });
+  for (const slug of SLUGS) {
+    test(`card opens case study: ${slug}`, async ({ page }) => {
+      await page.goto("/");
+      await page.locator(`a[href="/projects/${slug}"]`).click();
+      await expect(page).toHaveURL(new RegExp(`/projects/${slug}$`));
+      await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+    });
+  }
+});
 
 test("reduced motion: no canvas and no lenis class", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });

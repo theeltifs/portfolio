@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
 import { ProjectVideo } from "@/components/media/ProjectVideo";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
@@ -26,5 +26,35 @@ describe("FeaturedProjects", () => {
     for (const slug of ["chartli", "resolva", "bitcoin-prediction", "content-moderation"]) {
       expect(container.querySelector(`a[href="/projects/${slug}"]`)).not.toBeNull();
     }
+  });
+});
+
+function mockWideFine() {
+  window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+    matches: query.includes("min-width") || query.includes("pointer: fine"),
+    media: query,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+  })) as unknown as typeof window.matchMedia;
+}
+
+describe("FeaturedProjects modes", () => {
+  it('renders the Featured Projects heading and id="projects"', () => {
+    const { container, getByRole } = render(<FeaturedProjects />);
+    expect(container.querySelector("section#projects")).not.toBeNull();
+    expect(getByRole("heading", { level: 2, name: "Featured Projects" })).not.toBeNull();
+  });
+
+  it("has exactly one link per slug in stacked mode", () => {
+    const { container } = render(<FeaturedProjects />);
+    for (const slug of ["chartli", "resolva", "bitcoin-prediction", "content-moderation"]) {
+      expect(container.querySelectorAll(`a[href="/projects/${slug}"]`)).toHaveLength(1);
+    }
+  });
+
+  it("renders Universe markup when the mode is universe", () => {
+    mockWideFine();
+    const { getByText } = render(<FeaturedProjects />);
+    expect(getByText("Skip projects")).not.toBeNull();
   });
 });
