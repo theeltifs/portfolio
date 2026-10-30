@@ -31,8 +31,8 @@ describe("content", () => {
     expect(all).not.toContain("0305");
   });
 
-  it("labels Content Moderation as Orzeh work", () => {
-    expect(getProject("content-moderation")?.origin).toBe("orzeh");
+  it("every project has a real preview image", () => {
+    for (const p of projects) expect(p.poster).toMatch(/^\/media\/projects\/.+\.jpg$/);
   });
 
   it("no project copy contains PLACEHOLDER", () => {

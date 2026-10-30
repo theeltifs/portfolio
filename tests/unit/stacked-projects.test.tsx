@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { render } from "@testing-library/react";
 import { StackedProjects } from "@/components/sections/universe/StackedProjects";
 
-const SLUGS = ["chartli", "resolva", "bitcoin-prediction", "content-moderation"];
+const SLUGS = ["chartli", "resolva", "getaura", "asta"];
 
 describe("StackedProjects", () => {
   it("renders four cards with one link per slug", () => {

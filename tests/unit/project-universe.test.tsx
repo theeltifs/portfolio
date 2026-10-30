@@ -75,7 +75,7 @@ describe("ProjectUniverse", () => {
     const p = panels(container);
     expect(p[3].hasAttribute("inert")).toBe(false);
     expect(p[0].hasAttribute("inert")).toBe(true);
-    expect(getByRole("status").textContent).toBe("Project 4 of 4: Content Moderation Platform");
+    expect(getByRole("status").textContent).toBe("Project 4 of 4: Asta");
   });
 
   it("onUpdate at progress 1 keeps the last panel active", () => {
@@ -94,7 +94,7 @@ describe("ProjectUniverse", () => {
 
   it("focusing a link inside an inactive panel scrolls to its segment", () => {
     const { container } = render(<ProjectUniverse />);
-    const link = container.querySelector('a[href="/projects/bitcoin-prediction"]')!;
+    const link = container.querySelector('a[href="/projects/getaura"]')!;
     fireEvent.focusIn(link);
     expect(scrollTo).toHaveBeenCalledWith({ top: 3000, behavior: "smooth" });
   });

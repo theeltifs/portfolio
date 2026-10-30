@@ -40,7 +40,7 @@ describe("ProjectPanel", () => {
     expect(container.querySelectorAll('a[href="/projects/chartli"]')).toHaveLength(1);
   });
   it("renders the gradient fallback when the project has no video", () => {
-    const { container } = render(<ProjectPanel project={chartli} />);
+    const { container } = render(<ProjectPanel project={{ ...chartli, poster: undefined }} />);
     expect(container.querySelector("[data-fallback]")).not.toBeNull();
     expect(container.querySelector("video")).toBeNull();
   });
@@ -63,7 +63,7 @@ describe("UniverseProgress", () => {
     const { getByRole } = render(
       <UniverseProgress projects={list} activeIndex={0} onSelect={onSelect} />,
     );
-    fireEvent.click(getByRole("button", { name: "Go to Bitcoin Price Prediction" }));
+    fireEvent.click(getByRole("button", { name: "Go to Getaura" }));
     expect(onSelect).toHaveBeenCalledWith(2);
   });
 });

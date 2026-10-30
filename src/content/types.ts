@@ -1,7 +1,7 @@
 export type AccentKey = "green" | "blue" | "orange" | "violet";
 export type Stat = { value: string; label: string };
 export type Project = {
-  slug: "chartli" | "resolva" | "bitcoin-prediction" | "content-moderation";
+  slug: "chartli" | "resolva" | "getaura" | "asta";
   title: string;
   subtitle: string;
   pitch: string;

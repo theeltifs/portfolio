@@ -5,7 +5,7 @@ import type { AccentKey } from "@/content/types";
 
 type Props = { src?: string; poster?: string; accent: AccentKey; title: string };
 
-export function ProjectVideo({ src, poster, accent, title }: Props) {
+export function ProjectVideo({ src, poster, title }: Props) {
   const [failed, setFailed] = useState(false);
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -19,6 +19,18 @@ export function ProjectVideo({ src, poster, accent, title }: Props) {
     io.observe(video);
     return () => io.disconnect();
   }, [src, failed]);
+
+  if (!src && poster) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={poster}
+        alt={`${title} preview`}
+        loading="lazy"
+        className="aspect-[16/10] w-full rounded-xl object-cover"
+      />
+    );
+  }
 
   if (!src || failed) {
     return (

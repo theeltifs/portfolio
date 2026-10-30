@@ -11,7 +11,7 @@ import Page, { generateStaticParams } from "@/app/projects/[slug]/page";
 describe("case study page", () => {
   it("generates the four slugs", () => {
     expect(generateStaticParams().map((p) => p.slug).sort()).toEqual(
-      ["bitcoin-prediction", "chartli", "content-moderation", "resolva"],
+      ["asta", "chartli", "getaura", "resolva"],
     );
   });
 
@@ -19,7 +19,7 @@ describe("case study page", () => {
     const ui = await Page({ params: Promise.resolve({ slug: "resolva" }) });
     const { container, getByRole } = render(ui);
     expect(getByRole("heading", { level: 1 })).toHaveTextContent("Resolva");
-    expect(container.querySelector('a[href="/projects/bitcoin-prediction"]')).not.toBeNull();
+    expect(container.querySelector('a[href="/projects/getaura"]')).not.toBeNull();
   });
 
   it("calls notFound for an unknown slug", async () => {

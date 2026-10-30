@@ -10,6 +10,13 @@ describe("ProjectVideo", () => {
     expect(container.querySelector("video")).toBeNull();
   });
 
+  it("shows the poster image when there is no video", () => {
+    const { container } = render(<ProjectVideo poster="/media/projects/x.jpg" accent="green" title="T" />);
+    const img = container.querySelector("img")!;
+    expect(img.getAttribute("src")).toBe("/media/projects/x.jpg");
+    expect(container.querySelector("[data-fallback]")).toBeNull();
+  });
+
   it("swaps to fallback when the video errors", () => {
     const { container } = render(<ProjectVideo src="/x.mp4" accent="blue" title="T" />);
     const video = container.querySelector("video")!;
@@ -23,7 +30,7 @@ describe("ProjectVideo", () => {
 describe("FeaturedProjects", () => {
   it("links to the four case studies", () => {
     const { container } = render(<FeaturedProjects />);
-    for (const slug of ["chartli", "resolva", "bitcoin-prediction", "content-moderation"]) {
+    for (const slug of ["chartli", "resolva", "getaura", "asta"]) {
       expect(container.querySelector(`a[href="/projects/${slug}"]`)).not.toBeNull();
     }
   });
@@ -47,7 +54,7 @@ describe("FeaturedProjects modes", () => {
 
   it("has exactly one link per slug in stacked mode", () => {
     const { container } = render(<FeaturedProjects />);
-    for (const slug of ["chartli", "resolva", "bitcoin-prediction", "content-moderation"]) {
+    for (const slug of ["chartli", "resolva", "getaura", "asta"]) {
       expect(container.querySelectorAll(`a[href="/projects/${slug}"]`)).toHaveLength(1);
     }
   });

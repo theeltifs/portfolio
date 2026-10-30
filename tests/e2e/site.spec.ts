@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const SLUGS = ["chartli", "resolva", "bitcoin-prediction", "content-moderation"];
+const SLUGS = ["chartli", "resolva", "getaura", "asta"];
 
 test.describe("without JavaScript", () => {
   test.use({ javaScriptEnabled: false });
