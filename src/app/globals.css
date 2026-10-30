@@ -10,6 +10,7 @@
   --accent-blue: #4c8dff;
   --accent-orange: #ff8a3d;
   --accent-violet: #a46bff;
+  --orb: var(--accent-green);
   color-scheme: light;
 }
 
@@ -67,7 +68,6 @@ html.lenis body {
 
 /* Project Universe orb */
 .orb {
-  --orb: var(--accent-green);
   position: relative;
   aspect-ratio: 1;
   display: grid;
