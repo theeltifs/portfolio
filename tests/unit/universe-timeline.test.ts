@@ -1,0 +1,76 @@
+import { describe, it, expect } from "vitest";
+import {
+  SEGMENT,
+  activeIndexFor,
+  segmentScrollTop,
+  buildUniverseTimeline,
+} from "@/components/sections/universe/universe-timeline";
+
+const ACCENTS = ["#3ddc84", "#4c8dff", "#ff8a3d", "#a46bff"];
+
+function makeTargets() {
+  const el = () => document.createElement("div");
+  return {
+    stage: el(),
+    orb: el(),
+    particles: Array.from({ length: 12 }, el),
+    panels: Array.from({ length: 4 }, el),
+  };
+}
+
+describe("pure helpers", () => {
+  it("activeIndexFor clamps to 0..count-1", () => {
+    expect(activeIndexFor(0, 4)).toBe(0);
+    expect(activeIndexFor(0.25, 4)).toBe(1);
+    expect(activeIndexFor(0.999, 4)).toBe(3);
+    expect(activeIndexFor(1, 4)).toBe(3);
+    expect(activeIndexFor(-0.1, 4)).toBe(0);
+    expect(activeIndexFor(1.2, 4)).toBe(3);
+  });
+  it("SEGMENT fractions sum to 1", () => {
+    const sum = Object.values(SEGMENT).reduce((a, b) => a + b, 0);
+    expect(sum).toBeCloseTo(1, 10);
+  });
+  it("segmentScrollTop maps an index to its scroll position", () => {
+    expect(segmentScrollTop(1000, 5000, 2, 4)).toBe(3000);
+  });
+});
+
+describe("buildUniverseTimeline", () => {
+  it("is paused with one labelled unit per project", () => {
+    const tl = buildUniverseTimeline(makeTargets(), ACCENTS);
+    expect(tl.paused()).toBe(true);
+    expect(tl.duration()).toBe(4);
+    [0, 1, 2, 3].forEach((i) => expect(tl.labels[`project-${i}`]).toBe(i));
+  });
+  it("shows the active panel and hides the others mid-hold", () => {
+    const t = makeTargets();
+    const tl = buildUniverseTimeline(t, ACCENTS);
+    tl.progress(0.375);
+    expect(Number(t.panels[1].style.opacity)).toBeGreaterThan(0.95);
+    expect(Number(t.panels[0].style.opacity)).toBe(0);
+  });
+  it("starts hidden with the first accent and is reversible", () => {
+    const t = makeTargets();
+    const tl = buildUniverseTimeline(t, ACCENTS);
+    tl.progress(0);
+    const snapshot = () => ({
+      panels: t.panels.map((p) => p.style.opacity),
+      orb: t.stage.style.getPropertyValue("--orb"),
+      scale: t.orb.style.transform,
+    });
+    const before = snapshot();
+    before.panels.forEach((o) => expect(Number(o)).toBe(0));
+    expect(before.orb).toBe(ACCENTS[0]);
+    tl.progress(0.9);
+    tl.progress(0.4);
+    tl.progress(0);
+    expect(snapshot()).toEqual(before);
+  });
+  it("recolours the stage toward the next accent", () => {
+    const t = makeTargets();
+    const tl = buildUniverseTimeline(t, ACCENTS);
+    tl.time(1.2); // project 0 recolour (0.8..1.1) complete
+    expect(t.stage.style.getPropertyValue("--orb")).not.toBe(ACCENTS[0]);
+  });
+});
