@@ -28,7 +28,7 @@ export function ProjectVideo({ src, poster, accent, title }: Props) {
         aria-label={`${title} preview`}
         className="aspect-video w-full rounded-xl"
         style={{
-          background: `radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--accent-${accent}) 55%, transparent), transparent 70%), #e8ebf2`,
+          background: `radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--fg) 14%, transparent), transparent 70%), #e8ebf2`,
         }}
       />
     );
