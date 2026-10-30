@@ -35,6 +35,21 @@ describe("content", () => {
     expect(getProject("content-moderation")?.origin).toBe("orzeh");
   });
 
+  it("no project copy contains PLACEHOLDER", () => {
+    expect(JSON.stringify(projects)).not.toContain("PLACEHOLDER");
+  });
+
+  it("stacks have 1 to 6 chips", () => {
+    for (const p of projects) {
+      expect(p.stack.length).toBeGreaterThanOrEqual(1);
+      expect(p.stack.length).toBeLessThanOrEqual(6);
+    }
+  });
+
+  it("chartli is described as a medical scribe", () => {
+    expect(getProject("chartli")?.subtitle).toMatch(/medical scribe/i);
+  });
+
   it("returns undefined for unknown slug", () => {
     expect(getProject("nope")).toBeUndefined();
   });
