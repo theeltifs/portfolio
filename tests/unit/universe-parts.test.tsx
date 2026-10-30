@@ -1,8 +1,9 @@
-import { describe, it, expect } from "vitest";
-import { render } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
+import { render, fireEvent } from "@testing-library/react";
+import { UniverseProgress } from "@/components/sections/universe/UniverseProgress";
 import { Orb, ORB_PARTICLES } from "@/components/sections/universe/Orb";
 import { ProjectPanel } from "@/components/sections/universe/ProjectPanel";
-import { getProject } from "@/content/projects";
+import { getProject, projects } from "@/content/projects";
 
 describe("Orb", () => {
   it("live renders 12 particles inside an aria-hidden root", () => {
@@ -42,5 +43,27 @@ describe("ProjectPanel", () => {
     const { container } = render(<ProjectPanel project={chartli} />);
     expect(container.querySelector("[data-fallback]")).not.toBeNull();
     expect(container.querySelector("video")).toBeNull();
+  });
+});
+
+describe("UniverseProgress", () => {
+  const list = projects;
+  it("renders named buttons, counter and aria-current", () => {
+    const { getByRole, getByText } = render(
+      <UniverseProgress projects={list} activeIndex={1} onSelect={() => {}} />,
+    );
+    expect(getByRole("navigation", { name: "Project progress" })).not.toBeNull();
+    expect(getByRole("button", { name: "Go to Chartli" })).not.toBeNull();
+    expect(getByRole("button", { name: "Go to Resolva" }).getAttribute("aria-current")).toBe("step");
+    expect(getByRole("button", { name: "Go to Chartli" }).getAttribute("aria-current")).toBeNull();
+    expect(getByText("02 / 04")).not.toBeNull();
+  });
+  it("calls onSelect with the clicked index", () => {
+    const onSelect = vi.fn();
+    const { getByRole } = render(
+      <UniverseProgress projects={list} activeIndex={0} onSelect={onSelect} />,
+    );
+    fireEvent.click(getByRole("button", { name: "Go to Bitcoin Price Prediction" }));
+    expect(onSelect).toHaveBeenCalledWith(2);
   });
 });
