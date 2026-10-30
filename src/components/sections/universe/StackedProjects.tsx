@@ -1,7 +1,6 @@
 import { projects } from "@/content/projects";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Reveal } from "@/components/ui/Reveal";
-import { Orb } from "./Orb";
 import { ProjectPanel } from "./ProjectPanel";
 
 export function StackedProjects({ reduced }: { reduced: boolean }) {
@@ -10,7 +9,6 @@ export function StackedProjects({ reduced }: { reduced: boolean }) {
       {projects.map((p) => {
         const card = (
           <GlassCard className="p-4">
-            <Orb color={p.orb} className="mx-auto mb-4 h-14 w-14" />
             <ProjectPanel project={p} />
           </GlassCard>
         );

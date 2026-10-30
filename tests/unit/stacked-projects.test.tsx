@@ -12,9 +12,9 @@ describe("StackedProjects", () => {
       expect(container.querySelectorAll(`a[href="/projects/${s}"]`)).toHaveLength(1);
     }
   });
-  it("uses static orbs only, no particles", () => {
+  it("renders no orbs at all", () => {
     const { container } = render(<StackedProjects reduced={false} />);
-    expect(container.querySelectorAll("[data-orb].orb-static")).toHaveLength(4);
+    expect(container.querySelectorAll("[data-orb]")).toHaveLength(0);
     expect(container.querySelectorAll("[data-particle]")).toHaveLength(0);
   });
   it("reduced mode applies fade-in-view to each li", () => {
