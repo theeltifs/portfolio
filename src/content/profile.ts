@@ -5,12 +5,10 @@ export const profile: Profile = {
   role: "AI Engineer & Software Developer",
   headline: ["BUILDING", "INTELLIGENT", "SOLUTIONS"],
   intro:
-    "PLACEHOLDER: one-paragraph summary from Abdullah's CV (AI systems, products and the people they serve).",
+    "I am a computer science graduate specializing in AI engineering, with hands-on experience building multi-agent LLM pipelines, RAG systems, and full-stack AI applications. My work includes clinical documentation, customer support, and content moderation products, using tools such as FastAPI, LangGraph, Ollama, and Groq to bring AI systems into practical use.",
   email: "abdullahshafiqueofficiall@gmail.com",
-  // PLACEHOLDER: LinkedIn URL not yet supplied
-  linkedin: "",
-  // PLACEHOLDER: GitHub URL not yet supplied
-  github: "",
+  linkedin: "https://www.linkedin.com/in/abdullahshafiqe/",
+  github: "https://github.com/theeltifs",
   resumeHref: "/Abdullah-Shafique-Resume.pdf",
   stats: [
     { value: "4", label: "Projects Shipped" },

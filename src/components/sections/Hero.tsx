@@ -40,9 +40,11 @@ export function Hero() {
             <Button href="#projects" variant="solid" icon={<span aria-hidden="true">→</span>}>
               View My Work
             </Button>
-            <Button href={profile.resumeHref} variant="outline" download>
-              Download Resume
-            </Button>
+            {profile.resumeHref && (
+              <Button href={profile.resumeHref} variant="outline" download>
+                Download Resume
+              </Button>
+            )}
           </div>
           <div className="mt-6 flex flex-wrap gap-6">
             <ScriptNote rotate={-3}>From Ideas to Impact</ScriptNote>

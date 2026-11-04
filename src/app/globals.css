@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #ffffff;
+  --bg: #f6f6f3;
   --fg: #0b0d12;
   --muted: rgb(11 13 18 / 0.65);
   --glass: rgb(255 255 255 / 0.7);

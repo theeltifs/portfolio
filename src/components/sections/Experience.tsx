@@ -48,11 +48,13 @@ export function Experience() {
               <p className="text-sm text-muted">
                 {r.start} – {r.end}
               </p>
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-muted">
-                {r.bullets.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
-              </ul>
+              {r.bullets.length > 0 && (
+                <ul className="mt-3 list-disc space-y-1 pl-5 text-muted">
+                  {r.bullets.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ol>
