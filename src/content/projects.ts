@@ -18,7 +18,6 @@ export const projects: Project[] = [
     ],
     origin: "final-year",
     poster: "/media/projects/chartli.jpg",
-    orb: "#1fb5b0",
     links: {},
   },
   {
@@ -37,7 +36,6 @@ export const projects: Project[] = [
     ],
     origin: "personal",
     poster: "/media/projects/resolva.jpg",
-    orb: "#6a3df0",
     links: {},
   },
   {
@@ -56,7 +54,6 @@ export const projects: Project[] = [
     ],
     origin: "personal",
     poster: "/media/projects/getaura.jpg",
-    orb: "#2f5d3f",
     links: {},
   },
   {
@@ -76,7 +73,6 @@ export const projects: Project[] = [
     ],
     origin: "personal",
     poster: "/media/projects/asta.jpg",
-    orb: "#6b1e2e",
     links: {},
   },
 ];

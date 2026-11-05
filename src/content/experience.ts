@@ -2,15 +2,15 @@ import type { Role } from "./types";
 
 export const experience: Role[] = [
   {
-    company: "Amazon",
-    title: "Tech Support Specialist",
-    start: "Mar 2026",
-    end: "Aug 2026",
+    company: "Altif",
+    title: "Software Engineer",
+    start: "Aug 2026",
+    end: "Present",
     bullets: [
-      "Resolved complex customer grievances and technical issues, maintaining a 95%+ customer satisfaction rating while meeting strict timelines.",
-      "Guided customers through self-service knowledge bases to reduce repetitive ticket volume.",
-      "Worked with team leads and QA specialists to improve communication protocols and raise First-Contact Resolution by 12%.",
-      "Used CRM, ticketing, and diagnostic tools to investigate, document, and escalate platform bugs to backend engineering teams.",
+      "Design and develop responsive websites, web applications, and custom digital solutions for local and international businesses.",
+      "Translate business goals and client workflows into clear requirements, product flows, and practical technical plans.",
+      "Build end-to-end features across frontend, backend, APIs, and third-party integrations, choosing an approach that fits each project.",
+      "Work with clients through delivery, testing, and feedback to refine usability, reliability, and performance.",
     ],
   },
   {
