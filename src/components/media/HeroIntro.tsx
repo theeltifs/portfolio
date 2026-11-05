@@ -99,7 +99,7 @@ export function HeroIntro() {
           onPlaying={() => setHelloOn(true)}
           onEnded={() => setPhase("fade")}
           onError={() => setPhase("fade")}
-          className="block h-auto max-h-[68vh] max-w-full object-contain"
+          className="block h-auto max-h-[76vh] max-w-[92vw] object-contain"
         />
       </div>
     </div>

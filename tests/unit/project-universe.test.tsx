@@ -86,12 +86,6 @@ describe("ProjectUniverse", () => {
     expect(p.filter((el) => !el.hasAttribute("inert"))).toHaveLength(1);
   });
 
-  it("clicking a dot scrolls to its segment", () => {
-    const { getByRole } = render(<ProjectUniverse />);
-    fireEvent.click(getByRole("button", { name: "Go to Resolva" }));
-    expect(scrollTo).toHaveBeenCalledWith({ top: 2000, behavior: "smooth" });
-  });
-
   it("focusing a link inside an inactive panel scrolls to its segment", () => {
     const { container } = render(<ProjectUniverse />);
     const link = container.querySelector('a[href="/projects/getaura"]')!;

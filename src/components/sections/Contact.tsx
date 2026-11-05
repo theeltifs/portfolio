@@ -26,9 +26,11 @@ export function Contact() {
               GitHub
             </Button>
           )}
-          <Button href={profile.resumeHref} variant="solid" download>
-            Download Resume
-          </Button>
+          {profile.resumeHref && (
+            <Button href={profile.resumeHref} variant="solid" download>
+              Download Resume
+            </Button>
+          )}
         </div>
       </Reveal>
     </section>

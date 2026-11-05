@@ -1,21 +1,12 @@
 import { profile } from "@/content/profile";
 import { Button } from "@/components/ui/Button";
 import { ScriptNote } from "@/components/ui/ScriptNote";
-import { StatBar } from "@/components/ui/StatBar";
-import { GlassCard } from "@/components/ui/GlassCard";
 import { TechChip } from "@/components/ui/TechChip";
 import { HeroIntro } from "@/components/media/HeroIntro";
 import { HeroAvatar } from "@/components/media/HeroAvatar";
 import { HeroScene } from "@/components/three/HeroScene";
 
 const rail = ["Python", "FastAPI", "LangGraph", "Ollama", "React", "PostgreSQL"];
-
-const snippet = `class MultiAgentSystem:
-    def __init__(self, agents):
-        self.graph = build_graph(agents)
-
-    async def run(self, task):
-        return await self.graph.ainvoke(task)`;
 
 export function Hero() {
   return (
@@ -40,9 +31,11 @@ export function Hero() {
             <Button href="#projects" variant="solid" icon={<span aria-hidden="true">→</span>}>
               View My Work
             </Button>
-            <Button href={profile.resumeHref} variant="outline" download>
-              Download Resume
-            </Button>
+            {profile.resumeHref && (
+              <Button href={profile.resumeHref} variant="outline" download>
+                Download Resume
+              </Button>
+            )}
           </div>
           <div className="mt-6 flex flex-wrap gap-6">
             <ScriptNote rotate={-3}>From Ideas to Impact</ScriptNote>
@@ -50,14 +43,8 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative">
+        <div className="relative md:-translate-y-8">
           <HeroAvatar />
-          <GlassCard className="absolute -left-4 bottom-8 hidden w-72 p-4 md:block">
-            <p className="mb-2 text-xs text-muted">Multi-Agent System</p>
-            <pre className="overflow-hidden text-[11px] leading-relaxed text-fg/90">
-              <code>{snippet}</code>
-            </pre>
-          </GlassCard>
         </div>
       </div>
 
@@ -65,9 +52,6 @@ export function Hero() {
         {rail.map((t) => (
           <TechChip key={t}>{t}</TechChip>
         ))}
-      </div>
-      <div className="mx-auto mt-6 max-w-7xl">
-        <StatBar stats={profile.stats} />
       </div>
     </section>
   );

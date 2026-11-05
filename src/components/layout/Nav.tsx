@@ -5,7 +5,7 @@ import { profile } from "@/content/profile";
 
 const items = [
   { n: "01", label: "Home", id: "home" },
-  { n: "02", label: "About", id: "about" },
+  { n: "02", label: "Profile", id: "about" },
   { n: "03", label: "Projects", id: "projects" },
   { n: "04", label: "Experience", id: "experience" },
   { n: "05", label: "Contact", id: "contact" },
